@@ -1,0 +1,231 @@
+ANCHOR_RATIOS:
+- 0.5
+- 1
+- 2
+ANCHOR_SCALES:
+- 8
+- 16
+- 32
+CROP_RESIZE_WITH_MAX_POOL: false
+CUDA: true
+DATA_DIR: /usr/wiss/meinhard/code/tracking_wo_bnw/src/fpn/data
+DEDUP_BOXES: 0.0625
+EPS: 1.0e-14
+EXP_DIR: res101
+FEAT_STRIDE:
+- 16
+FPN_ANCHOR_SCALES:
+- 32
+- 64
+- 128
+- 256
+- 512
+FPN_ANCHOR_STRIDE: 1
+FPN_FEAT_STRIDES:
+- 4
+- 8
+- 16
+- 32
+- 64
+GPU_ID: 0
+HAS_MASK: true
+MATLAB: matlab
+MAX_NUM_GT_BOXES: 100
+MOBILENET:
+  DEPTH_MULTIPLIER: 1.0
+  FIXED_LAYERS: 5
+  REGU_DEPTH: false
+  WEIGHT_DECAY: 4.0e-05
+PIXEL_MEANS: !!python/object/apply:numpy.core.multiarray._reconstruct
+  args:
+  - !!python/name:numpy.ndarray ''
+  - !!python/tuple
+    - 0
+  - !!binary |
+    Yg==
+  state: !!python/tuple
+  - 1
+  - !!python/tuple
+    - 1
+    - 1
+    - 3
+  - !!python/object/apply:numpy.dtype
+    args:
+    - f8
+    - 0
+    - 1
+    state: !!python/tuple
+    - 3
+    - <
+    - null
+    - null
+    - null
+    - -1
+    - -1
+    - 0
+  - false
+  - !!binary |
+    0LNZ9bm+WUB/arx0k/xcQK+UZYhjsV5A
+POOLING_MODE: align
+POOLING_SIZE: 7
+PYRAM_ROI_C4_SIZE: 224
+RESNET:
+  FIXED_BLOCKS: 1
+  MAX_POOL: false
+RNG_SEED: 3
+ROOT_DIR: /usr/wiss/meinhard/code/tracking_wo_bnw/src/fpn
+TEST:
+  BBOX_CLIP: true
+  BBOX_REG: true
+  HAS_RPN: true
+  MAX_SIZE: 1000
+  MODE: nms
+  NMS: 0.3
+  PROPOSAL_METHOD: gt
+  RPN_MIN_SIZE: 16
+  RPN_NMS_THRESH: 0.7
+  RPN_POST_NMS_TOP_N: 1000
+  RPN_PRE_NMS_TOP_N: 6000
+  RPN_TOP_N: 5000
+  SCALES:
+  - 600
+  SOFT_NMS_METHOD: 1
+  SVM: false
+TRAIN:
+  ASPECT_CROPPING: false
+  ASPECT_GROUPING: false
+  BATCH_SIZE: 128
+  BBOX_INSIDE_WEIGHTS:
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  BBOX_NORMALIZE_MEANS:
+  - 0.0
+  - 0.0
+  - 0.0
+  - 0.0
+  BBOX_NORMALIZE_STDS:
+  - 0.1
+  - 0.1
+  - 0.2
+  - 0.2
+  BBOX_NORMALIZE_TARGETS: true
+  BBOX_NORMALIZE_TARGETS_PRECOMPUTED: true
+  BBOX_REG: true
+  BBOX_THRESH: 0.5
+  BG_THRESH_HI: 0.5
+  BG_THRESH_LO: 0.0
+  BIAS_DECAY: false
+  BN_TRAIN: false
+  DISPLAY: 20
+  DOUBLE_BIAS: false
+  FG_FRACTION: 0.25
+  FG_THRESH: 0.5
+  GAMMA: 0.1
+  HAS_RPN: true
+  IMS_PER_BATCH: 1
+  LEARNING_RATE: 0.001
+  MAX_SIZE: 1000
+  MOMENTUM: 0.9
+  PROPOSAL_METHOD: gt
+  RPN_BATCHSIZE: 256
+  RPN_BBOX_INSIDE_WEIGHTS:
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  RPN_CLOBBER_POSITIVES: false
+  RPN_FG_FRACTION: 0.5
+  RPN_MIN_SIZE: 8
+  RPN_NEGATIVE_OVERLAP: 0.3
+  RPN_NMS_THRESH: 0.7
+  RPN_POSITIVE_OVERLAP: 0.7
+  RPN_POSITIVE_WEIGHT: -1.0
+  RPN_POST_NMS_TOP_N: 2000
+  RPN_PRE_NMS_TOP_N: 12000
+  SCALES:
+  - 600
+  SNAPSHOT_ITERS: 5000
+  SNAPSHOT_KEPT: 3
+  SNAPSHOT_PREFIX: res101_faster_rcnn
+  STEPSIZE:
+  - 30000
+  SUMMARY_INTERVAL: 180
+  TRIM_HEIGHT: 600
+  TRIM_WIDTH: 600
+  TRUNCATED: false
+  USE_ALL_GT: true
+  USE_FLIPPED: true
+  USE_GT: false
+  WEIGHT_DECAY: 0.0001
+USE_GPU_NMS: true
+seed: 453695
+siamese:
+  cnn:
+    output_dim: 128
+  dataloader:
+    K: 4
+    P: 18
+    crop_H: 256
+    crop_W: 128
+    max_per_person: 1000
+    normalize_mean:
+    - 0.485
+    - 0.456
+    - 0.406
+    normalize_std:
+    - 0.229
+    - 0.224
+    - 0.225
+    transform: random
+    vis_threshold: 0.3
+  db_train: train
+  db_val: false
+  desription: all
+  lr_scheduler: true
+  max_epochs: 69
+  model_args:
+    loss: batch_hard
+    margin: 0.2
+    prec_at_k: 3
+  module_name: siamese
+  name: res50-mot17-batch_hard
+  seed: 12345
+  solver:
+    optim: Adam
+    optim_args:
+      lr: 0.0003
+      weight_decay: 0.0
+tracktor:
+  dataset: mot17_test_FRCNN17
+  desription: null
+  frame_split:
+  - 0.0
+  - 1.0
+  interpolate: false
+  module_name: MOT17
+  name: Tracktor++
+  network: fpn
+  obj_detect_config: output/fpn/res101/mot_2017_train/voc_init_iccv19/config.yaml
+  obj_detect_weights: output/fpn/res101/mot_2017_train/voc_init_iccv19/fpn_1_27.pth
+  reid_network_config: output/tracktor/siamese/res50-mot17-batch_hard/sacred_config.yaml
+  reid_network_weights: output/tracktor/siamese/res50-mot17-batch_hard/ResNet_iter_25245.pth
+  seed: 12345
+  tracker:
+    detection_nms_thresh: 0.3
+    detection_person_thresh: 0.5
+    do_align: true
+    do_reid: true
+    inactive_patience: 10
+    max_features_num: 10
+    motion_model: false
+    number_of_iterations: 100
+    public_detections: true
+    regression_nms_thresh: 0.6
+    regression_person_thresh: 0.5
+    reid_iou_threshold: 0.2
+    reid_sim_threshold: 2.0
+    termination_eps: 1.0e-05
+    warp_mode: cv2.MOTION_EUCLIDEAN
+  write_images: false
